@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function createMovieDiv(movie) {
   const movieDiv = document.createElement("div");
   const addButton = document.createElement("button");
+  addButton.setAttribute("id", "addButton");
+  const infoButton = document.createElement("button");
+  infoButton.setAttribute("id", "infoButton");
   const movieImg = document.createElement("img");
 
   movieDiv.classList.add("movie");
@@ -20,12 +23,14 @@ function createMovieDiv(movie) {
   movieImg.alt = movie.title;
 
   updateButtonText(addButton, movie.id);
-
-  //addButton.textContent = "Add to Watchlist";
-  //ddButton.appendChild(movieImg);
+  infoButton.textContent = "Info";
 
   addButton.addEventListener("click", function () {
     movieClicked(movie.id);
+  });
+
+  infoButton.addEventListener("click", function () {
+    showMovieInfo(movie.id);
   });
 
   if (isMovieInWatchlist(movie.id)) {
@@ -37,6 +42,7 @@ function createMovieDiv(movie) {
 
   movieDiv.appendChild(movieImg);
   movieDiv.appendChild(addButton);
+  movieDiv.appendChild(infoButton);
   return movieDiv;
 }
 
@@ -119,4 +125,8 @@ function showWatchlist() {
     movieListContainer.appendChild(movieDiv);
   });
   console.log("localStoredWatchlist", localStoredWatchlist);
+}
+
+function showMovieInfo(movieID) {
+  alert("Movie info not implemented yet");
 }

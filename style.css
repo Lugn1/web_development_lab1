@@ -19,11 +19,14 @@ body {
   height: 200px;
 }
 
+@media only screen and (max-width: 600px) {
+}
+
 #indexText {
   display: flex;
   justify-content: center;
   color: white;
-  font-size: 75px;
+  font-size: 70px;
   font-family: sans-serif, serif, Arial;
   height: fit-content;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 2px 0 #000,
@@ -67,15 +70,6 @@ body {
   margin-top: 0px;
 }
 
-#watchlist-container {
-  #movieContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-  }
-}
-
 #movieList {
   display: flex;
   flex-wrap: wrap;
@@ -112,31 +106,6 @@ body {
   transition: 0.3s;
 }
 
-.movieList {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.footer {
-  width: 100%;
-  height: 50px;
-  margin-top: 50px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background-color: #fecf00;
-  border: black solid 1px;
-  background-attachment: scroll;
-  visibility: hidden;
-}
-
-.footer p {
-  text-align: center;
-  font-size: 14px;
-  color: white;
-}
-
 #ratedMoviesText {
   display: flex;
   justify-content: center;
@@ -160,24 +129,50 @@ body {
   height: fit-content;
 }
 
-.movie button {
+.movie #addButton {
   position: relative;
   width: 100%;
   height: fit-content;
-  top: -50%;
+  top: -40%;
   left: -45%;
   transform: translate(50%, 50%);
   background-color: #f56200;
   font-size: 18px;
   font-family: sans-serif, serif, Arial;
   color: white;
-  border: 2px solid black;
-  border-radius: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
   cursor: pointer;
   display: none;
 }
 
-.movie:hover button {
+.movie #infoButton {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  top: -38%;
+  left: -45%;
+  transform: translate(50%, 50%);
+  background-color: #f56200;
+  font-size: 18px;
+  font-family: sans-serif, serif, Arial;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  cursor: pointer;
+  display: none;
+}
+
+.movie:hover #addButton {
+  display: block;
+  transition: 0.3s;
+}
+
+.movie:hover #infoButton {
   display: block;
   transition: 0.3s;
 }
@@ -188,6 +183,27 @@ body {
   font-size: 20px;
   font-family: sans-serif, serif, Arial;
   color: white;
-  border: 2px solid black;
-  border-radius: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+  margin-top: 50px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #fecf00;
+  border: black solid 1px;
+  background-attachment: scroll;
+  visibility: hidden;
+}
+
+.footer p {
+  text-align: center;
+  font-size: 14px;
+  color: white;
 }
