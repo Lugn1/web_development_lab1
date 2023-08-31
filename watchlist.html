@@ -3,7 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Watchlist</title>
   </head>
-  <body></body>
+  <body>
+    <div class="header">
+      <div class="menubar">
+        <a href="index.html"> <button>Movies</button> </a>
+        <a href="watchlist.html"> <button>My Watchlist</button> </a>
+        <a href="ratedMovies.html"> <button>My Ratings</button></a>
+      </div>
+    </div>
+    <div id="watchlistText"><p>My Watchlist</p></div>
+    <div id="watchlist-container">
+      <div class="movieList" id="movieList"></div>
+    </div>
+    <footer class="footer">
+      <p><i>Labb 1 William Karlström</i></p>
+    </footer>
+  </body>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="movies-data.js"></script>
 </html>
