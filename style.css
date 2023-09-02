@@ -1,5 +1,5 @@
 html {
-  background-color: #3eacd1;
+  background-color: #152b38;
 }
 
 body {
@@ -19,10 +19,7 @@ body {
   height: 200px;
 }
 
-@media only screen and (max-width: 600px) {
-}
-
-#indexText {
+.titleText {
   display: flex;
   justify-content: center;
   color: white;
@@ -45,7 +42,7 @@ body {
   height: 35px;
   width: 125px;
   text-align: center;
-  background-color: #3eacd1;
+  background-color: #152b38;
   color: white;
   border: solid 1px black;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
@@ -53,30 +50,13 @@ body {
   font-size: large;
   font-family: sans-serif, serif, Arial;
   box-shadow: #000 0px 0px 3px 0px;
+  border-radius: 5px;
 }
 
 .menubar button:hover {
-  background-color: #f56200;
+  background-color: #3eabd1;
   color: white;
   cursor: pointer;
-}
-
-#movieContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  margin: 120px;
-  margin-top: 0px;
-}
-
-#movieList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-  border: solid 2px #f56200;
-  border-radius: 10px;
 }
 
 .movieRow {
@@ -121,14 +101,6 @@ body {
   margin-top: 20px;
 }
 
-#watchlistText {
-  display: flex;
-  justify-content: center;
-  color: white;
-  font-size: 75px;
-  height: fit-content;
-}
-
 .movie #addButton {
   position: relative;
   width: 100%;
@@ -136,7 +108,7 @@ body {
   top: -40%;
   left: -45%;
   transform: translate(50%, 50%);
-  background-color: #f56200;
+  background-color: #152b38;
   font-size: 18px;
   font-family: sans-serif, serif, Arial;
   color: white;
@@ -148,7 +120,36 @@ body {
   display: none;
 }
 
+.movie:hover #addButton {
+  display: block;
+  transition: 0.3s;
+}
+
 .movie #infoButton {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  top: -38%;
+  left: -45%;
+  transform: translate(50%, 50%);
+  background-color: #fecf00;
+  font-size: 18px;
+  font-family: sans-serif, serif, Arial;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  cursor: pointer;
+  display: none;
+}
+
+.movie:hover #infoButton {
+  display: block;
+  transition: 0.3s;
+}
+
+.movie #rateButton {
   position: relative;
   width: 100%;
   height: fit-content;
@@ -167,19 +168,14 @@ body {
   display: none;
 }
 
-.movie:hover #addButton {
-  display: block;
-  transition: 0.3s;
-}
-
-.movie:hover #infoButton {
+.movie:hover #rateButton {
   display: block;
   transition: 0.3s;
 }
 
 .watermark {
   position: absolute;
-  background-color: #f56200;
+  background-color: #152b38;
   font-size: 20px;
   font-family: sans-serif, serif, Arial;
   color: white;
@@ -189,7 +185,63 @@ body {
     1px 1px 0 #000;
 }
 
-.footer {
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modalContent {
+  background-color: #152b38;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  font-size: 16px;
+  max-width: 600px;
+  font-family: sans-serif, serif, Arial;
+  color: white;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.closeButton {
+  color: #a1a1a1;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+}
+
+/* #watchlistText {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 75px;
+  height: fit-content;
+} */
+
+/* .footer {
   width: 100%;
   height: 50px;
   margin-top: 50px;
@@ -206,4 +258,20 @@ body {
   text-align: center;
   font-size: 14px;
   color: white;
-}
+} */
+
+/* #movieContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 120px;
+  margin-top: 0px;
+} */
+
+/* #watchList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  #f56200
+} */

@@ -31,6 +31,7 @@ function createMovieDiv(movie) {
 
   infoButton.addEventListener("click", function () {
     showMovieInfo(movie.id);
+    console.log("Info button clicked");
   });
 
   if (isMovieInWatchlist(movie.id)) {
@@ -106,7 +107,7 @@ function movieClicked(movieID) {
 }
 
 function showWatchlist() {
-  const movieListContainer = document.querySelector(".movieList");
+  const movieListContainer = document.querySelector("#watchList");
   const localStoredWatchlist = JSON.parse(
     localStorage.getItem("watchlist") || "[]"
   );
@@ -121,12 +122,69 @@ function showWatchlist() {
     movieImg.src = movie.imageSrc;
     movieImg.alt = movie.title;
 
+    const rateButton = document.createElement("button");
+    rateButton.textContent = "Rate";
+    rateButton.setAttribute("id", "rateButton");
+    rateButton.addEventListener("click", function () {
+      rateMovie(movie.id);
+    });
+
     movieDiv.appendChild(movieImg);
+    movieDiv.appendChild(rateButton);
     movieListContainer.appendChild(movieDiv);
   });
   console.log("localStoredWatchlist", localStoredWatchlist);
 }
 
 function showMovieInfo(movieID) {
-  alert("Movie info not implemented yet");
+  console.log("showMovieInfo", movieID);
+  const movie = movies.find((movie) => movie.id === movieID);
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modalContent");
+
+  const movieTitle = document.createElement("h1");
+  movieTitle.textContent = movie.title;
+
+  const movieYearAndGenre = document.createElement("h4");
+  movieYearAndGenre.textContent = movie.year + "  -  " + movie.genres;
+
+  const plot = document.createElement("p");
+  plot.textContent = movie.plot;
+
+  const closeButton = document.createElement("span");
+  closeButton.classList.add("closeButton");
+  closeButton.textContent = "x";
+  closeButton.addEventListener("click", function () {
+    hideMovieInfo(modal);
+  });
+
+  modalContent.appendChild(movieTitle);
+  modalContent.appendChild(movieYearAndGenre);
+  modalContent.appendChild(plot);
+
+  modalContent.appendChild(closeButton);
+
+  modal.appendChild(modalContent);
+
+  document.body.appendChild(modal);
+  console.log("showMovieInfo", movie.plot);
+
+  modal.style.display = "block";
+
+  modal.addEventListener("click", function () {
+    if (event.target === modal) {
+      hideMovieInfo(modal);
+    }
+  });
+}
+
+function hideMovieInfo(modal) {
+  modal.style.display = "none";
+}
+
+function rateMovie(movieID) {
+  alert("Movie rating not implemented yet");
 }
