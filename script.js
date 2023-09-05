@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
   showWatchlist();
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  populateRatedMovies();
+});
+
 function createMovieDiv(movie) {
   const movieDiv = document.createElement("div");
   const addButton = document.createElement("button");
@@ -112,8 +116,6 @@ function showWatchlist() {
     localStorage.getItem("watchlist") || "[]"
   );
 
-  // movieListContainer.innerHTML = "";   // Why is this needed?
-
   localStoredWatchlist.forEach((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.classList.add("movie");
@@ -175,7 +177,7 @@ function showMovieInfo(movieID) {
   modal.style.display = "block";
 
   modal.addEventListener("click", function () {
-    if (event.target === modal) {
+    if (target === modal) {
       hideMovieInfo(modal);
     }
   });
@@ -186,5 +188,50 @@ function hideMovieInfo(modal) {
 }
 
 function rateMovie(movieID) {
-  alert("Movie rating not implemented yet");
+  const rating = prompt("Enter your rating (1-5):");
+  if (rating !== null && !isNaN(rating) && rating >= 1 && rating <= 5) {
+    const comments = prompt("Enter your comments:");
+    if (comments !== null) {
+      const movie = movies.find((movie) => movie.id === movieID);
+      const ratedMovie = {
+        id: movieID,
+        title: movie.title,
+        imageSrc: movie.imageSrc,
+        rating: parseInt(rating),
+        comments: comments,
+      };
+      const ratedMovies = JSON.parse(
+        localStorage.getItem("ratedMovies") || "[]"
+      );
+      ratedMovies.push(ratedMovie);
+      localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
+      console.log("Movie rated and comments saved.");
+    }
+  }
+}
+
+function populateRatedMovies() {
+  const ratedMoviesContainer = document.querySelector("#ratedMovies");
+  const ratedMovies = JSON.parse(localStorage.getItem("ratedMovies") || "[]");
+
+  ratedMovies.forEach((movie) => {
+    const movieDiv = document.createElement("div");
+    movieDiv.classList.add("movie");
+
+    const movieImg = document.createElement("img");
+    movieImg.src = movie.imageSrc;
+    movieImg.alt = movie.title;
+
+    const rating = document.createElement("h4");
+    rating.textContent = "Rating: " + movie.rating;
+
+    const comments = document.createElement("p");
+    comments.textContent = movie.comments;
+
+    movieDiv.appendChild(movieImg);
+    movieDiv.appendChild(rating);
+    movieDiv.appendChild(comments);
+    ratedMoviesContainer.appendChild(movieDiv);
+  });
+  console.log("ratedMovies", ratedMovies);
 }
