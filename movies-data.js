@@ -1,4 +1,13 @@
 const movies = [
+  // {
+  //   id: "theShawshankRedemption",
+  //   title: "The Shawshank Redemption",
+  //   year: 1994,
+  //   genres: ["Drama"],
+  //   plot: "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+  //   imageSrc:
+  //     "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg",
+  // },
   {
     id: "rambo1",
     title: "Rambo: First Blood",

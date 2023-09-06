@@ -2,18 +2,6 @@ import { movies } from "./movies-data.js";
 
 const watchlist = new Array();
 
-document.addEventListener("DOMContentLoaded", function () {
-  populateMovieRow();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  showWatchlist();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  populateRatedMovies();
-});
-
 function createMovieDiv(movie) {
   const movieDiv = document.createElement("div");
   const addButton = document.createElement("button");
@@ -79,9 +67,9 @@ function populateMovieRow() {
 
 function updateButtonText(button, movieID) {
   if (isMovieInWatchlist(movieID)) {
-    button.textContent = "Remove from watchlist";
+    button.textContent = "Remove";
   } else {
-    button.textContent = "Add to watchlist";
+    button.textContent = "Add";
   }
 }
 
@@ -188,8 +176,9 @@ function hideMovieInfo(modal) {
 }
 
 function rateMovie(movieID) {
-  const rating = prompt("Enter your rating (1-5):");
-  if (rating !== null && !isNaN(rating) && rating >= 1 && rating <= 5) {
+  // swap prompt to form
+  const rating = prompt("Enter your rating (1-10):");
+  if (rating !== null && !isNaN(rating) && rating >= 1 && rating <= 10) {
     const comments = prompt("Enter your comments:");
     if (comments !== null) {
       const movie = movies.find((movie) => movie.id === movieID);
@@ -214,24 +203,44 @@ function populateRatedMovies() {
   const ratedMoviesContainer = document.querySelector("#ratedMovies");
   const ratedMovies = JSON.parse(localStorage.getItem("ratedMovies") || "[]");
 
+  ratedMovies.sort((a, b) => b.rating - a.rating);
+
   ratedMovies.forEach((movie) => {
     const movieDiv = document.createElement("div");
-    movieDiv.classList.add("movie");
+    movieDiv.classList.add("ratedMovie");
 
     const movieImg = document.createElement("img");
     movieImg.src = movie.imageSrc;
     movieImg.alt = movie.title;
 
-    const rating = document.createElement("h4");
-    rating.textContent = "Rating: " + movie.rating;
+    const movieTitle = document.createElement("h1");
+    movieTitle.textContent = movie.title;
+
+    const rating = document.createElement("h2");
+
+    rating.textContent = "Rating: " + movie.rating + "/10";
 
     const comments = document.createElement("p");
     comments.textContent = movie.comments;
 
+    movieDiv.appendChild(movieTitle);
     movieDiv.appendChild(movieImg);
+
     movieDiv.appendChild(rating);
     movieDiv.appendChild(comments);
     ratedMoviesContainer.appendChild(movieDiv);
   });
   console.log("ratedMovies", ratedMovies);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  populateMovieRow();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  showWatchlist();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  populateRatedMovies();
+});
