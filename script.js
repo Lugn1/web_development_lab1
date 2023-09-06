@@ -1,6 +1,16 @@
 import { movies } from "./movies-data.js";
 
-const watchlist = new Array();
+document.addEventListener("DOMContentLoaded", function () {
+  populateMovieRow();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  showWatchlist();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  populateRatedMovies();
+});
 
 function createMovieDiv(movie) {
   const movieDiv = document.createElement("div");
@@ -23,7 +33,6 @@ function createMovieDiv(movie) {
 
   infoButton.addEventListener("click", function () {
     showMovieInfo(movie.id);
-    console.log("Info button clicked");
   });
 
   if (isMovieInWatchlist(movie.id)) {
@@ -58,6 +67,9 @@ function removeMovieFromWatchlist(movieID) {
 
 function populateMovieRow() {
   const movieRow = document.getElementById("movieRow");
+  if (movieRow === null) {
+    return;
+  }
 
   movies.forEach((movie) => {
     const movieDiv = createMovieDiv(movie);
@@ -88,11 +100,9 @@ function movieClicked(movieID) {
     if (!isMovieInWatchlist) {
       localStoredWatchlist.push(clickedMovie);
       localStorage.setItem("watchlist", JSON.stringify(localStoredWatchlist));
-      console.log("Movie added to watchlist");
       location.reload();
     } else {
       removeMovieFromWatchlist(clickedMovie.id);
-      console.log("Movie removed from watchlist");
       location.reload();
     }
   }
@@ -100,6 +110,9 @@ function movieClicked(movieID) {
 
 function showWatchlist() {
   const movieListContainer = document.querySelector("#watchList");
+  if (movieListContainer === null) {
+    return;
+  }
   const localStoredWatchlist = JSON.parse(
     localStorage.getItem("watchlist") || "[]"
   );
@@ -123,11 +136,9 @@ function showWatchlist() {
     movieDiv.appendChild(rateButton);
     movieListContainer.appendChild(movieDiv);
   });
-  console.log("localStoredWatchlist", localStoredWatchlist);
 }
 
 function showMovieInfo(movieID) {
-  console.log("showMovieInfo", movieID);
   const movie = movies.find((movie) => movie.id === movieID);
   const modal = document.createElement("div");
   modal.classList.add("modal");
@@ -160,12 +171,11 @@ function showMovieInfo(movieID) {
   modal.appendChild(modalContent);
 
   document.body.appendChild(modal);
-  console.log("showMovieInfo", movie.plot);
 
   modal.style.display = "block";
 
-  modal.addEventListener("click", function () {
-    if (target === modal) {
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
       hideMovieInfo(modal);
     }
   });
@@ -176,7 +186,7 @@ function hideMovieInfo(modal) {
 }
 
 function rateMovie(movieID) {
-  // swap prompt to form
+  // TODO swap prompt to form
   const rating = prompt("Enter your rating (1-10):");
   if (rating !== null && !isNaN(rating) && rating >= 1 && rating <= 10) {
     const comments = prompt("Enter your comments:");
@@ -194,13 +204,15 @@ function rateMovie(movieID) {
       );
       ratedMovies.push(ratedMovie);
       localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
-      console.log("Movie rated and comments saved.");
     }
   }
 }
 
 function populateRatedMovies() {
   const ratedMoviesContainer = document.querySelector("#ratedMovies");
+  if (ratedMoviesContainer === null) {
+    return;
+  }
   const ratedMovies = JSON.parse(localStorage.getItem("ratedMovies") || "[]");
 
   ratedMovies.sort((a, b) => b.rating - a.rating);
@@ -230,17 +242,4 @@ function populateRatedMovies() {
     movieDiv.appendChild(comments);
     ratedMoviesContainer.appendChild(movieDiv);
   });
-  console.log("ratedMovies", ratedMovies);
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  populateMovieRow();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  showWatchlist();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  populateRatedMovies();
-});
