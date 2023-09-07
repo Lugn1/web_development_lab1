@@ -33,14 +33,18 @@ body {
 .menubar {
   display: flex;
   justify-content: center;
-  margin: 5px;
+  margin: 2px;
   width: 100%;
 }
 
-.menubar button {
-  margin-left: 5px;
+.menuButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
   height: 35px;
   width: 125px;
+  margin: 1px;
   text-align: center;
   background-color: #152b38;
   color: white;
@@ -53,7 +57,7 @@ body {
   border-radius: 5px;
 }
 
-.menubar button:hover {
+.menuButton:hover {
   background-color: #3eabd1;
   color: white;
   cursor: pointer;
