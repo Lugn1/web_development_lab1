@@ -220,6 +220,30 @@ body {
   top: 0;
 }
 
+.modalContent form {
+  background-color: #152b38;
+  margin: auto;
+  border-radius: 10px;
+  width: 80%;
+  font-size: 16px;
+  max-width: 600px;
+  font-family: sans-serif, serif, Arial;
+  color: white;
+}
+
+.modalContent input[type="number"],
+.modalContent textarea {
+  background-color: white;
+  border: 1px solid #888;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+  font-family: sans-serif, serif, Arial;
+  width: 100%;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
 .closeButton {
   color: #a1a1a1;
   position: absolute;
