@@ -71,6 +71,7 @@ body {
 }
 
 .movie {
+  position: relative;
   height: 275px;
   width: 200px;
   margin: 25px;
@@ -120,7 +121,7 @@ body {
   box-shadow: #000 0px 5px 5px 5px;
 }
 
-.movie #addButton {
+.movie .addButton {
   position: relative;
   width: 100%;
   height: fit-content;
@@ -137,12 +138,12 @@ body {
   display: none;
 }
 
-.movie:hover #addButton {
+.movie:hover .addButton {
   display: block;
   transition: 0.3s;
 }
 
-.movie #infoButton {
+.infoButton {
   position: relative;
   width: 100%;
   height: fit-content;
@@ -159,7 +160,24 @@ body {
   display: none;
 }
 
-.movie:hover #infoButton {
+#removeButton {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  top: -38%;
+  left: -45%;
+  transform: translate(50%, 50%);
+  background-color: #fecf00;
+  font-size: 18px;
+  font-family: sans-serif, serif, Arial;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+}
+
+.movie:hover .infoButton {
   display: block;
   transition: 0.3s;
 }
@@ -168,7 +186,7 @@ body {
   position: relative;
   width: 100%;
   height: fit-content;
-  top: -38%;
+  top: -40%;
   left: -45%;
   transform: translate(50%, 50%);
   background-color: #fecf00;
@@ -186,9 +204,18 @@ body {
   transition: 0.3s;
 }
 
+.movie:hover #removeButton {
+  display: block;
+  transition: 0.3s;
+}
+
 .watermark {
   position: absolute;
+  top: 0;
+  left: 0;
   background-color: #fecf00;
+  top: 0;
+  left: 0;
   font-size: 20px;
   font-family: sans-serif, serif, Arial;
   color: black;
@@ -248,6 +275,27 @@ body {
   box-sizing: border-box;
 }
 
+.modalContent button[type="submit"] {
+  background-color: #fecf00;
+  color: black;
+  font-size: 16px;
+  font-family: sans-serif, serif, Arial;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.modalContent input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.modalContent button[type="submit"]:hover {
+  background-color: #f8e178;
+}
+
 .closeButton {
   color: #a1a1a1;
   position: absolute;
@@ -271,7 +319,7 @@ body {
     width: 125px;
   }
 
-  .movie #infoButton {
+  .movie .infoButton {
     position: relative;
     width: 100%;
     height: fit-content;
@@ -287,7 +335,7 @@ body {
     display: block;
   }
 
-  .movie #addButton {
+  .movie .addButton {
     position: relative;
     width: 100%;
     height: fit-content;

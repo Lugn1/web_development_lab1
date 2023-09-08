@@ -11,38 +11,60 @@ fetch("./movies-data.json")
 
     function createMovieDiv(movie) {
       const movieDiv = document.createElement("div");
-      const addButton = document.createElement("button");
-      addButton.setAttribute("id", "addButton");
-      const infoButton = document.createElement("button");
-      infoButton.setAttribute("id", "infoButton");
-      const movieImg = document.createElement("img");
-
       movieDiv.classList.add("movie");
+      movieDiv.setAttribute("movieID", movie.id);
+
+      const movieImg = document.createElement("img");
       movieImg.src = movie.imageSrc;
       movieImg.alt = movie.title;
+      movieDiv.appendChild(movieImg);
 
-      updateButtonText(addButton, movie.id);
-      infoButton.textContent = "Info";
+      const addButton = createAddButton(movie.id);
+      movieDiv.appendChild(addButton);
 
-      addButton.addEventListener("click", function () {
-        movieClicked(movie.id);
-      });
-
-      infoButton.addEventListener("click", function () {
-        showMovieInfo(movie.id);
-      });
+      const infoButton = createInfoButton(movie.id);
+      movieDiv.appendChild(infoButton);
 
       if (isMovieInWatchlist(movie.id)) {
-        const watermark = document.createElement("div");
-        watermark.classList.add("watermark");
-        watermark.textContent = "On Watchlist";
+        const watermark = createWatermark();
         movieDiv.appendChild(watermark);
       }
 
-      movieDiv.appendChild(movieImg);
-      movieDiv.appendChild(addButton);
-      movieDiv.appendChild(infoButton);
       return movieDiv;
+    }
+
+    function createAddButton(movieID) {
+      const addButton = document.createElement("button");
+      addButton.classList.add("addButton");
+      addButton.setAttribute("id", `addButton-${movieID}`);
+
+      updateButtonText(addButton, movieID);
+      addButton.addEventListener("click", function () {
+        movieClicked(movieID);
+      });
+
+      return addButton;
+    }
+
+    function createInfoButton(movieID) {
+      const infoButton = document.createElement("button");
+      infoButton.classList.add("infoButton");
+      infoButton.setAttribute("data-action-id", movieID);
+      infoButton.textContent = "Info";
+
+      infoButton.addEventListener("click", function () {
+        showMovieInfo(movieID);
+      });
+
+      return infoButton;
+    }
+
+    function createWatermark() {
+      const watermark = document.createElement("div");
+      watermark.classList.add("watermark");
+      watermark.textContent = "On Watchlist";
+
+      return watermark;
     }
 
     function isMovieInWatchlist(movieID) {
@@ -60,6 +82,8 @@ fetch("./movies-data.json")
         (movie) => movie.id !== movieID
       );
       localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+
+      showWatchlist();
     }
 
     function populateMovieRow() {
@@ -100,10 +124,27 @@ fetch("./movies-data.json")
             "watchlist",
             JSON.stringify(localStoredWatchlist)
           );
-          location.reload();
         } else {
           removeMovieFromWatchlist(clickedMovie.id);
-          location.reload();
+        }
+      }
+
+      const addButton = document.getElementById(`addButton-${movieID}`);
+      updateButtonText(addButton, movieID);
+
+      const watermarkDiv = document.querySelector(
+        `.movie[movieID='${movieID}']`
+      );
+
+      if (isMovieInWatchlist(movieID)) {
+        const watermark = document.createElement("div");
+        watermark.classList.add("watermark");
+        watermark.textContent = "On Watchlist";
+        watermarkDiv.appendChild(watermark);
+      } else {
+        const watermark = watermarkDiv.querySelector(".watermark");
+        if (watermark) {
+          watermarkDiv.removeChild(watermark);
         }
       }
     }
@@ -129,11 +170,20 @@ fetch("./movies-data.json")
         rateButton.textContent = "Rate";
         rateButton.setAttribute("id", "rateButton");
         rateButton.addEventListener("click", function () {
-          rateMovie(movie.id);
+          rateMovie(movie.id, movieDiv);
+        });
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.setAttribute("id", "removeButton");
+        removeButton.addEventListener("click", function () {
+          removeMovieFromWatchlist(movie.id);
+          movieDiv.remove();
         });
 
         movieDiv.appendChild(movieImg);
         movieDiv.appendChild(rateButton);
+        movieDiv.appendChild(removeButton);
         movieListContainer.appendChild(movieDiv);
       });
     }
@@ -185,7 +235,7 @@ fetch("./movies-data.json")
       modal.style.display = "none";
     }
 
-    function rateMovie(movieID) {
+    function rateMovie(movieID, movieDiv) {
       const modal = document.createElement("div");
       modal.classList.add("modal");
 
@@ -213,8 +263,15 @@ fetch("./movies-data.json")
       submitButton.type = "submit";
       submitButton.textContent = "Submit";
 
+      const removeWatchlistCheckbox = document.createElement("label");
+      removeWatchlistCheckbox.textContent = "Remove from watchlist: ";
+      const removeWatchlistInput = document.createElement("input");
+      removeWatchlistInput.type = "checkbox";
+      removeWatchlistCheckbox.appendChild(removeWatchlistInput);
+
       ratingForm.appendChild(ratingLabel);
       ratingForm.appendChild(commentsLabel);
+      ratingForm.appendChild(removeWatchlistCheckbox);
       ratingForm.appendChild(submitButton);
 
       modalContent.appendChild(ratingForm);
@@ -233,9 +290,23 @@ fetch("./movies-data.json")
         const ratedMovies = JSON.parse(
           localStorage.getItem("ratedMovies") || "[]"
         );
-        ratedMovies.push(ratedMovie);
+
+        const existingMovie = ratedMovies.findIndex(
+          (movie) => movie.id === movieID
+        );
+
+        if (existingMovie !== -1) {
+          ratedMovies[existingMovie] = ratedMovie;
+        } else {
+          ratedMovies.push(ratedMovie);
+        }
         localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
         hideMovieInfo(modal);
+
+        if (removeWatchlistInput.checked) {
+          removeMovieFromWatchlist(movieID);
+          movieDiv.remove();
+        }
       };
 
       modal.appendChild(modalContent);
