@@ -381,11 +381,25 @@ body {
     position: relative;
     width: 100%;
     height: fit-content;
-    top: -28%;
+    top: -40%;
     left: -50%;
-    transform: translate(50%, 50%);
     background-color: #fecf00;
-    font-size: 16px;
+    font-size: 18px;
+    font-family: sans-serif, serif, Arial;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: block;
+  }
+
+  .movie .removeButton {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    top: -35%;
+    left: -50%;
+    background-color: #fecf00;
+    font-size: 18px;
     font-family: sans-serif, serif, Arial;
     color: black;
     border: 1px solid black;
