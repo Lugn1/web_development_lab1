@@ -104,13 +104,13 @@ body {
 
 .ratedMovie {
   display: flex;
-  border-top: #fff 1px solid;
   flex-direction: column;
   align-items: center;
 }
 
 #ratedMovies p {
   font-size: 20px;
+  font-style: italic;
 }
 
 #ratedMovies img {
@@ -160,7 +160,7 @@ body {
   display: none;
 }
 
-#removeButton {
+.removeButton {
   position: relative;
   width: 100%;
   height: fit-content;
@@ -182,7 +182,7 @@ body {
   transition: 0.3s;
 }
 
-.movie #rateButton {
+.movie .rateButton {
   position: relative;
   width: 100%;
   height: fit-content;
@@ -199,12 +199,12 @@ body {
   display: none;
 }
 
-.movie:hover #rateButton {
+.movie:hover .rateButton {
   display: block;
   transition: 0.3s;
 }
 
-.movie:hover #removeButton {
+.movie:hover .removeButton {
   display: block;
   transition: 0.3s;
 }
@@ -313,6 +313,32 @@ body {
   cursor: pointer;
 }
 
+.ratedMovie p {
+  margin-top: 0px;
+  font-family: sans-serif, serif, Arial;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 2px 0 #000,
+    2px 2px 0 #000;
+  margin-bottom: 10px;
+}
+
+.ratedMovie h1 {
+  margin-top: 5px;
+
+  font-family: sans-serif, serif, Arial;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 2px 0 #000,
+    2px 2px 0 #000;
+}
+
+.ratedMovie h2 {
+  font-family: sans-serif, serif, Arial;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 2px 0 #000,
+    2px 2px 0 #000;
+  border-bottom: white 1px solid;
+}
+
 @media only screen and (max-width: 600px) {
   .movie {
     height: 200px;
@@ -351,7 +377,7 @@ body {
     display: block;
   }
 
-  .movie #rateButton {
+  .movie .rateButton {
     position: relative;
     width: 100%;
     height: fit-content;
@@ -379,10 +405,15 @@ body {
 
   #ratedMovies p {
     font-size: 16px;
-    margin: 20px;
+    font-style: italic;
+    font-family: sans-serif, serif, Arial;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 2px 0 #000,
+      2px 2px 0 #000;
   }
 
   #ratedMovies h1 {
-    font-size: 30px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 2px 0 #000,
+      2px 2px 0 #000;
+    font-family: sans-serif, serif, Arial;
   }
 }

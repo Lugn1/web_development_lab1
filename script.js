@@ -154,6 +154,9 @@ fetch("./movies-data.json")
       if (movieListContainer === null) {
         return;
       }
+
+      movieListContainer.innerHTML = "";
+
       const localStoredWatchlist = JSON.parse(
         localStorage.getItem("watchlist") || "[]"
       );
@@ -168,14 +171,14 @@ fetch("./movies-data.json")
 
         const rateButton = document.createElement("button");
         rateButton.textContent = "Rate";
-        rateButton.setAttribute("id", "rateButton");
+        rateButton.classList.add("rateButton");
         rateButton.addEventListener("click", function () {
           rateMovie(movie.id, movieDiv);
         });
 
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
-        removeButton.setAttribute("id", "removeButton");
+        removeButton.classList.add("removeButton");
         removeButton.addEventListener("click", function () {
           removeMovieFromWatchlist(movie.id);
           movieDiv.remove();
