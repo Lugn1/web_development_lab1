@@ -6,7 +6,7 @@ body {
   margin: 0px 0px 0px 0px;
 }
 
-.header {
+header {
   display: flex;
   align-items: end;
   background-color: #fecf00;
@@ -19,7 +19,7 @@ body {
   height: 200px;
 }
 
-.titleText {
+#titleText {
   display: flex;
   justify-content: center;
   color: white;
@@ -30,7 +30,7 @@ body {
     2px 2px 0 #000;
 }
 
-.menubar {
+nav {
   display: flex;
   justify-content: center;
   margin: 2px;
@@ -63,7 +63,9 @@ body {
   cursor: pointer;
 }
 
-.movieRow {
+#indexMovies,
+#ratedMovies,
+#watchList {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

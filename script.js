@@ -10,7 +10,7 @@ fetch("./movies-data.json")
     populateRatedMovies();
 
     function createMovieDiv(movie) {
-      const movieDiv = document.createElement("div");
+      const movieDiv = document.createElement("figure");
       movieDiv.classList.add("movie");
       movieDiv.setAttribute("movieID", movie.id);
 
@@ -87,14 +87,14 @@ fetch("./movies-data.json")
     }
 
     function populateMovieRow() {
-      const movieRow = document.getElementById("movieRow");
-      if (movieRow === null) {
+      const indexMovies = document.getElementById("indexMovies");
+      if (indexMovies === null) {
         return;
       }
 
       movies.forEach((movie) => {
         const movieDiv = createMovieDiv(movie);
-        movieRow.appendChild(movieDiv);
+        indexMovies.appendChild(movieDiv);
       });
     }
 
@@ -162,7 +162,7 @@ fetch("./movies-data.json")
       );
 
       localStoredWatchlist.forEach((movie) => {
-        const movieDiv = document.createElement("div");
+        const movieDiv = document.createElement("figure");
         movieDiv.classList.add("movie");
 
         const movieImg = document.createElement("img");
@@ -336,7 +336,7 @@ fetch("./movies-data.json")
       ratedMovies.sort((a, b) => b.rating - a.rating);
 
       ratedMovies.forEach((movie) => {
-        const movieDiv = document.createElement("div");
+        const movieDiv = document.createElement("figure");
         movieDiv.classList.add("ratedMovie");
 
         const movieImg = document.createElement("img");
